@@ -382,7 +382,7 @@ func TestRecvOnlyRemoteUndoChanges(t *testing.T) {
 
 	files := make([]protocol.FileInfo, 0, 2)
 	snap := f.fset.Snapshot()
-	snap.WithHave(protocol.LocalDeviceID, func(fi protocol.FileIntf) bool {
+	snap.WithHave(protocol.LocalDeviceID, func(fi db.FileIntf) bool {
 		if n := fi.FileName(); n != file && n != knownFile {
 			return true
 		}
@@ -441,7 +441,7 @@ func setupKnownFiles(t *testing.T, ffs fs.Filesystem, data []byte) []protocol.Fi
 	return knownFiles
 }
 
-func setupROFolder(t *testing.T) (*model, *receiveOnlyFolder) {
+func setupROFolder(t *testing.T) (*testModel, *receiveOnlyFolder) {
 	t.Helper()
 
 	w := createTmpWrapper(defaultCfg)
@@ -455,6 +455,15 @@ func setupROFolder(t *testing.T) (*model, *receiveOnlyFolder) {
 
 	m := newModel(w, myID, "syncthing", "dev", db.NewLowlevel(backend.OpenMemory()), nil)
 	m.ServeBackground()
+	// Ensure the initial cfg setup happened
+	for {
+		m.fmut.RLock()
+		_, ok := m.folderRunnerToken["ro"]
+		m.fmut.RUnlock()
+		if ok {
+			break
+		}
+	}
 	must(t, m.ScanFolder("ro"))
 
 	m.fmut.RLock()
