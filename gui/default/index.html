@@ -17,7 +17,7 @@
   <link rel="shortcut icon" href="assets/img/favicon-{{syncthingStatus()}}.png"/>
   <link rel="mask-icon" href="assets/img/safari-pinned-tab.svg" color="#0882c8"/>
 
-  <title ng-bind="thisDeviceName() + ' | Syncthing'"></title>
+  <title ng-bind="thisDeviceName() + ' | cyfrSync'"></title>
   <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet"/>
   <link href="vendor/daterangepicker/daterangepicker.css" rel="stylesheet"/>
   <link href="assets/font/raleway.css" rel="stylesheet"/>
@@ -36,7 +36,7 @@
   <nav class="navbar navbar-top navbar-default" role="navigation">
     <div class="container">
       <span class="navbar-brand" aria-hidden="true">
-        <img class="logo hidden-xs" src="assets/img/logo-horizontal.svg" height="32" width="117" alt=""/>
+        <img class="logo hidden-xs" src="assets/img/logo-horizontal-cyfr.svg" height="32" width="117" alt=""/>
         <img class="logo hidden visible-xs" src="assets/img/favicon-default.png" height="32" alt=""/>
       </span>
       <p class="navbar-text hidden-xs" ng-class="{'hidden-sm':upgradeInfo && upgradeInfo.newer}">{{thisDeviceName()}}</p>
@@ -107,7 +107,7 @@
           </div>
           <div class="panel-body">
             <p>
-            <span translate>The Syncthing admin interface is configured to allow remote access without a password.</span>
+            <span translate>The cyfrSync admin interface is configured to allow remote access without a password.</span>
             <b><span translate>This can easily give hackers access to read and change any files on your computer.</span></b>
             <span translate>Please set a GUI Authentication User and Password in the Settings dialog.</span>
             </p>
@@ -136,7 +136,7 @@
             </h3>
           </div>
           <div class="panel-body">
-            <p translate>The configuration has been saved but not activated. Syncthing must restart to activate the new configuration.</p>
+            <p translate>The configuration has been saved but not activated. cyfrSync must restart to activate the new configuration.</p>
           </div>
           <div class="panel-footer">
             <button type="button" class="btn btn-sm btn-default pull-right" ng-click="restart()">
